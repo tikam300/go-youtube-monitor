@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
 type Response struct {
@@ -30,6 +32,10 @@ func GetSubscribers() (Item, error) {
 	if err != nil {
 		fmt.Println(err)
 		return Item{}, err
+	}
+	err = godotenv.Load()
+	if err != nil {
+		fmt.Println("Error loading .env file")
 	}
 
 	q := req.URL.Query()

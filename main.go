@@ -21,7 +21,8 @@ func Stats(w http.ResponseWriter, r *http.Request) {
 }
 
 func setupRoutes() {
-	http.HandleFunc("/", homePage)
+	fs := http.FileServer(http.Dir("./public"))
+	http.Handle("/", fs)
 	http.HandleFunc("/stats", Stats)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
